@@ -4,6 +4,8 @@ flask(rest api,single page),sql lite baza pitanja ,svelte spa --------------> fl
 								getQuestion
 							      <--------------
 							       question json
+
+       
 ili preuzmi sva pitanja odjednom pa ispisuj na sajtu ili sve redom
 render template zaboravi
 
