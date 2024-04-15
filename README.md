@@ -19,6 +19,14 @@ python -m virtualenv env
 pip install -r reqirements.txt
 ```
 
+## Komande za upravljanje taskovima
+
+git branch task/schema
+git checkout task/schema
+git branch -d task/schema (brisanje)
+git status (stanje repozitorijuma)
+
+## Random dokumentacija(nemam naziv za naslov)
 
 flask(rest api,single page),sql lite baza pitanja 
 svelte spa --------------> flask rest api
@@ -29,14 +37,6 @@ ili preuzmi sva pitanja odjednom pa ispisuj na sajtu ili sve redom
 render template zaboravi
 
 svaki task ima svoj branch pa se on konektuje ako je ispravan na main/master branch
-
-## Komande za upravljanje taskovima
-
-git branch task/schema
-git checkout task/schema
-git branch -d task/schema (brisanje)
-git status (stanje repozitorijuma)
-
 
 trivia api
 google translate api
