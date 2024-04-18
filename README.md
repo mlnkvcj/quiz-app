@@ -21,10 +21,12 @@ pip install -r reqirements.txt
 
 ## Komande za upravljanje taskovima
 
+```Shell
 git branch task/schema
 git checkout task/schema
 git branch -d task/schema (brisanje)
 git status (stanje repozitorijuma)
+```
 
 ## Random dokumentacija(nemam naziv za naslov)
 
