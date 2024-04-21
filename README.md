@@ -16,7 +16,7 @@ cd backend
 Set-ExecutionPolicy Unrestricted -Scope Process
 python -m virtualenv env
 ./env/Scripts/activate
-pip install -r reqirements.txt
+pip install -r requirements.txt
 ```
 
 ## Komande za upravljanje taskovima
