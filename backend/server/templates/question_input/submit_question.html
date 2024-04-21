@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% if 'username' in session %}
+    <p>Welcome, {{ session['username'] }}! (<a href="{{ url_for('logout') }}">Logout</a>)</p>
+{% endif %}
+
+{% block content %}
+<h2>Submit a Question</h2>
+<form method="POST" action="/submit_question">
+    <label for="question">Question:</label><br>
+    <input type="text" id="question" name="question" required><br>
+    <label for="option1">Option 1:</label><br>
+    <input type="text" id="option1" name="option1" required><br>
+    <label for="option2">Option 2:</label><br>
+    <input type="text" id="option2" name="option2" required><br>
+    <label for="option3">Option 3:</label><br>
+    <input type="text" id="option3" name="option3" required><br>
+    <label for="option4">Option 4:</label><br>
+    <input type="text" id="option4" name="option4" required><br>
+    <label for="answer">Correct Answer:</label><br>
+    <input type="text" id="answer" name="answer" required><br>
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}
