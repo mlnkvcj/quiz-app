@@ -1,4 +1,7 @@
 <style>
+  *{
+    color : black;
+  }
     .register-form {
       max-width: 400px;
       margin: auto;
@@ -26,6 +29,7 @@
       border: 1px solid #ccc;
       border-radius: 4px;
       box-sizing: border-box;
+      color: black;
     }
   
     .register-form input[type="submit"] {
@@ -44,16 +48,33 @@
     }
   </style>
 
+<script>
+    import { goto } from "$app/navigation";
+  import { PUBLIC_API_URL } from "$env/static/public";
+  const credentials = {
+    username: "",
+    password: "",
+  };
+  const handleRegister = async () => {
+    let res = await fetch(`${PUBLIC_API_URL}/auth/register`, { body: JSON.stringify(credentials), method: "POST" });
+    if (res.ok){
+        goto("/login");
+    } else {
+      alert("Error registering user");
+    }
+  }
+</script>
+
   <div class="register-form">
     <h2>Register</h2>
-    <form method="post">
+    <form method="post" on:submit|preventDefault={handleRegister}>
 		<label for="username">Username</label>
-		<input name="username" id="username" required>
+		<input name="username" id="username" required bind:value={credentials.username}>
 		<label for="password">Password</label>
-		<input type="password" name="password" id="password" required>
+		<input type="password" name="password" id="password" required bind:value={credentials.password}>
 		<input type="submit" value="Register">
 	  </form>
-    <p>Already have an account? <a href="login.svelte" target="_self">Login</a></p>
+    <p>Already have an account? <a href="/login">Login</a></p>
   </div>
   
   

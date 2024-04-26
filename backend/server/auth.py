@@ -1,19 +1,26 @@
 import functools
+import json
+from flask_cors import cross_origin
 
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
+from flask import json
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from server.db import get_db
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
-@bp.route('/register', methods=('GET', 'POST'))
+@cross_origin()
+
+@bp.route('/register', methods=['POST'])
 def register():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        data = json.loads(request.get_data())
+        print(data)
+        username = data['username']
+        password = data["password"]
         db = get_db()
         error = None
 
@@ -31,18 +38,14 @@ def register():
                 db.commit()
             except db.IntegrityError:
                 error = f"User {username} is already registered."
-            else:
-                return redirect(url_for("auth.login"))
+    return "OK", 200
 
-        flash(error)
-
-    return render_template('./frontend/src/routes/auth/register.svelte')
-
-@bp.route('/login', methods=('GET', 'POST'))
+@bp.route('/login', methods=['POST'])
 def login():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        data = json.loads(request.get_data())
+        username = data['username']
+        password = data["password"]
         db = get_db()
         error = None
         user = db.execute(
@@ -57,11 +60,13 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user['id']
-            return redirect(url_for('./frontend/src/routes/+page.svelte'))
+            return "OK", 200
 
-        flash(error)
-
-    return render_template('./frontend/src/routes/auth/login.svelte')
+@bp.route("/check-session", methods=["GET"])
+def check_session():
+    if "user_id" in session:
+        return "OK", 200
+    return "Unauthorized", 403
 
 @bp.before_app_request
 def load_logged_in_user():

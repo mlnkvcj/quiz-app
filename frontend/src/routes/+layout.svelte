@@ -9,16 +9,22 @@
 		<!-- App Bar -->
 		<AppBar>
 			<svelte:fragment slot="lead">
-				<strong class="text-xl uppercase">Skeleton</strong>
+				<strong class="text-xl uppercase">404 Not Found</strong>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
 				<a
 					class="btn btn-sm variant-ghost-surface"
-					href="https://github.com/skeletonlabs/skeleton"
-					target="_blank"
+					href="/login"
 					rel="noreferrer"
 				>
-					GitHub
+					Login
+				</a>
+				<a
+					class="btn btn-sm variant-ghost-surface"
+					href="/register"
+					rel="noreferrer"
+				>
+					Sign Up
 				</a>
 			</svelte:fragment>
 		</AppBar>

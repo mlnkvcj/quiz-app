@@ -1,4 +1,8 @@
   <style>
+    *{
+      color : black;
+    }
+
     .login-form {
       max-width: 400px;
       margin: auto;
@@ -26,6 +30,7 @@
       border: 1px solid #ccc;
       border-radius: 4px;
       box-sizing: border-box;
+      color: black;
     }
   
     .login-form input[type="submit"] {
@@ -43,17 +48,38 @@
       background-color: #45a049;
     }
   </style>
-
+<script>
+    import { goto } from "$app/navigation";
+  import { PUBLIC_API_URL } from "$env/static/public";
+  import { store } from "$lib/stores";
+  import { getUserDetails } from "$lib/stores";
+  const credentials = {
+    username: "",
+    password: "",
+  };
+  const handleLogin = async () => {
+    let res = await fetch(`${PUBLIC_API_URL}/auth/login`, { body: JSON.stringify(credentials), method: "POST" });
+    if (res.ok){
+      const user = await getUserDetails( credentials.username, credentials.password )
+      console.log(user)
+      $store = user;
+      goto("/");
+    }
+    else{
+      alert("Error logging in");
+    }
+  }
+</script>
   <div class="login-form">
     <h2>Login</h2>
-    <form method="post">
+    <form method="post" on:submit|preventDefault={handleLogin}>
       <label for="username">Username</label>
-      <input name="username" id="username" required>
+      <input name="username" id="username" required bind:value={credentials.username}>
       <label for="password">Password</label>
-      <input type="password" name="password" id="password" required>
+      <input type="password" name="password" id="password" required bind:value={credentials.password}>
       <input type="submit" value="Log In">
     </form>
-    <p>Don't have an account? <a href="register.svelte" target="_self">Register</a></p>
+    <p>Don't have an account? <a href="/register">Register</a></p>
   </div>
   
   

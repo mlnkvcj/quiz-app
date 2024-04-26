@@ -4,8 +4,8 @@ DROP TABLE IF EXISTS questions;
 CREATE TABLE user (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   username TEXT UNIQUE NOT NULL,
-  password TEXT NOT NULL
-  highscore INTEGER;
+  password TEXT NOT NULL,
+  highscore INTEGER
 );
 
 CREATE TABLE questions (
